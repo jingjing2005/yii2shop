@@ -55,4 +55,13 @@ class Brand extends \yii\db\ActiveRecord
             'status' => '状态',
         ];
     }
+
+//    public function getImage(){
+//        if(substr($this->logo,0,7)=='http://'){
+//            return $this->logo;
+//        }else{
+//            return '@web'.$this->logo;
+//        }
+//
+//    }
 }

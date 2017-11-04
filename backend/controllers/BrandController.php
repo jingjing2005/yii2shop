@@ -14,6 +14,7 @@ use yii\bootstrap\Html;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\UploadedFile;
+use flyok666\qiniu\Qiniu;
 
 class BrandController extends Controller
 {
@@ -117,5 +118,30 @@ class BrandController extends Controller
         $brand = Brand::findOne($id);
         $brand->delete();
         return $this->redirect('index');
+    }
+    //数据上传
+    public function actionUpload(){
+        //七牛云上传
+
+        $config = [
+            'accessKey'=>'MncRJQyt-qSig9XcdanHAxgFmVtu0gx6Z8_weeEJ',
+            'secretKey'=>'_R4bhhuCjsVle31bgwEOogMxeLDHPlWYddsiAUWZ',
+            'domain'=>'http://oyvj1nrbv.bkt.clouddn.com/',
+            'bucket'=>' phpshop',
+            'area'=>Qiniu::AREA_HUANAN
+        ];
+
+
+
+        $qiniu = new Qiniu($config);
+        $key = time();
+        $qiniu->uploadFile($_FILES['file']['tmp_name'],$key);
+        $url = $qiniu->getLink($key);
+
+        $info = [
+            'code'=>0,
+            'url'=>$url,
+            'attachment'=>$url
+        ];
     }
 }
