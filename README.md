@@ -20,3 +20,22 @@
 #### 文章分类和文章管理模块
 * 文章分类和文章管理，首先完成基本的增删改查功能。
 * 在文章添加的时候涉及到同时向两张表里面添加数据，先添加文章表，再将刚添加进去的数据的id查询出来，再添加文章内容。
+#### 商品无限极分类设计要点
+~~~
+$this->createTable('goods_category', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull()->comment('名称'),
+            'parent_id'=>$this->integer()->notNull()->defaultValue(0)->comment('父级ID'),
+            'tree' => $this->integer()->notNull()->comment('树'),
+            'lft' => $this->integer()->notNull()->comment('左值'),
+            'rgt' => $this->integer()->notNull()->comment('右值'),
+            'depth' => $this->integer()->notNull()->comment('级别'),
+            'intro'=>$this->string()->comment('简介'),
+        ]);
+~~~
+#### 需求
+* 商品分类的增删改查
+* 添加商品分类用ztree插件
+#### 要点难点
+* ztree插件原本就把健壮性做好了，在编辑和删除分类的时候，只需要异常捕获错误信息，再修改一下就可以。
+

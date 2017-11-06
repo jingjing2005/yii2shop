@@ -4,24 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\brand */
+/* @var $model backend\models\articlecategory */
 /* @var $form ActiveForm */
 ?>
-<div class="brand-add">
+<div class="articlecategory-add">
 
     <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'name') ?>
+        <?php $model->status=1?>
+        <?= $form->field($model, 'status')->radioList(\backend\models\ArticleCategory::$cateArr) ?>
+        <?= $form->field($model, 'intro')->textarea() ?>
         <?= $form->field($model, 'sort') ?>
-         <?php $model->status=1;?>
-        <?= $form->field($model, 'status')->radioList(\backend\models\Brand::$statusArr) ?>
-        <?= $form->field($model, 'intro') ?>
-<!--    //= $form->field($model, 'images')->fileInput(['multipe'=>true])   -->
-    <?=$form->field($model, 'logo')->widget('manks\FileInput', []);?>
-
         <div class="form-group">
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 
-</div><!-- brand-add -->
+</div><!-- articlecategory-add -->

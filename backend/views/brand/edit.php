@@ -16,7 +16,8 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'status')->radioList(\backend\models\Brand::$statusArr) ?>
         <?= $form->field($model, 'intro') ?>
-        <?= $form->field($model, 'images')->fileInput(['multipe'=>true])?>
+
+    <?=$form->field($model, 'logo')->widget('manks\FileInput', []);?>
         <div class="form-group">
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>

@@ -15,7 +15,7 @@
             <td><?=$brand->id?></td>
             <td><?=$brand->name?></td>
             <td><?=$brand->intro?></td>
-            <td><?=\yii\bootstrap\Html::img('@web/'.$brand->logo,['width'=>'100'])?></td>
+            <td><?=\yii\bootstrap\Html::img($brand->image,['width'=>'100'])?></td>
             <td><?=$brand->sort?></td>
             <td><?=$brand->status?></td>
             <td><?php

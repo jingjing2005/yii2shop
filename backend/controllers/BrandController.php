@@ -16,6 +16,7 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use flyok666\qiniu\Qiniu;
 
+
 class BrandController extends Controller
 {
     //显示页面
@@ -44,7 +45,7 @@ class BrandController extends Controller
         //创建request对象
         $request = \Yii::$app->request;
         //默认的图片
-        $oldFile = 'images/1.jpg';
+        //$oldFile = 'images/1.jpg';
 
 //        var_dump($oldFile);exit;
 //        var_dump($model->load($request->post()));exit;
@@ -52,24 +53,24 @@ class BrandController extends Controller
         if($model->load($request->post())){
 
             //实例化上传的文件
-            $model->images = UploadedFile::getInstance($model,'images');
+//            $model->images = UploadedFile::getInstance($model,'images');
 //            var_dump($model->images);exit;
             //再次验证
             if($model->validate()){
                 //判断是否有文件传过来
-                if($model->images){
-                    //拼接文件名
-                    $filePath = 'images/'.time().'.'.$model->images->extension;
-//                var_dump($filePath);exit;
-                    //保存文件
-                    $model->images->saveAs($filePath,false);
-                    //保存
-                    $model->logo = $filePath;
-                }else{
-                    //保存
-                    $model->logo = $oldFile;
-//                    var_dump($model->logo);exit;
-                }
+//                if($model->images){
+//                    //拼接文件名
+//                    $filePath = 'images/'.time().'.'.$model->images->extension;
+////                var_dump($filePath);exit;
+//                    //保存文件
+//                    $model->images->saveAs($filePath,false);
+//                    //保存
+//                    $model->logo = $filePath;
+//                }else{
+//                    //保存
+//                    $model->logo = $oldFile;
+////                    var_dump($model->logo);exit;
+//                }
                 //保存数据
                 $model->save();
                 //跳转页面
@@ -90,18 +91,18 @@ class BrandController extends Controller
         //绑定数据
         if($model->load($request->post())){
             //实例化上传文件
-            $model->images = UploadedFile::getInstance($model,'images');
+//            $model->images = UploadedFile::getInstance($model,'images');
             //再次验证数据
             if($model->validate()){
                 //判断是否有图片传过来
-                if($model->images){
-                    //拼接文件名
-                    $filePath = 'images/'.time().'.'.$model->images->extension;
-                    //保存文件
-                    $model->images->saveAs($filePath,false);
-                    //保存
-                    $model->logo = $filePath;
-                }
+//                if($model->images){
+//                    //拼接文件名
+//                    $filePath = 'images/'.time().'.'.$model->images->extension;
+//                    //保存文件
+//                    $model->images->saveAs($filePath,false);
+//                    //保存
+//                    $model->logo = $filePath;
+//                }
                 //保存数据
                 $model->save();
                 //跳转页面
@@ -122,13 +123,14 @@ class BrandController extends Controller
     //数据上传
     public function actionUpload(){
         //七牛云上传
-
+//var_dump($_FILES);exit;
         $config = [
             'accessKey'=>'MncRJQyt-qSig9XcdanHAxgFmVtu0gx6Z8_weeEJ',
             'secretKey'=>'_R4bhhuCjsVle31bgwEOogMxeLDHPlWYddsiAUWZ',
             'domain'=>'http://oyvj1nrbv.bkt.clouddn.com/',
-            'bucket'=>' phpshop',
+            'bucket'=>'phpshop',
             'area'=>Qiniu::AREA_HUANAN
+
         ];
 
 
@@ -143,5 +145,6 @@ class BrandController extends Controller
             'url'=>$url,
             'attachment'=>$url
         ];
+        exit(json_encode($info));
     }
 }

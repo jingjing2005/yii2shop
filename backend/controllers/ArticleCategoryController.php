@@ -71,7 +71,7 @@ class ArticleCategoryController extends Controller
             }
         }
         //显示视图
-        return $this->render('add',['model'=>$model]);
+        return $this->render('edit',['model'=>$model]);
     }
 
 
