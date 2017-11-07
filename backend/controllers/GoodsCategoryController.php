@@ -19,13 +19,7 @@ class GoodsCategoryController extends Controller
 {
     //显示
     public function actionIndex(){
-        $goods = GoodsCategory::find()->all();
-        //显示视图
-//        $childs = GoodsCategory::find()->where(['parent_id'=>1])->all();
-//        $options = ArrayHelper::map($childs,'id','name');
-
-//            var_dump($options);exit;
-
+        $goods = GoodsCategory::find()->orderBy('tree,lft')->all();
         return $this->render('index',['goods'=>$goods]);
     }
 
@@ -52,15 +46,6 @@ class GoodsCategoryController extends Controller
                 }else{
                     //找到父级ID
                     $parentId = GoodsCategory::findOne(['id'=>$model->parent_id]);
-                    if($parentId->depth==0){
-                        $model->name = '-----'.$model->name;
-                    }
-                    if($parentId->depth==1){
-                        $model->name = '----------'.$model->name;
-                    }
-                    if($parentId->depth==2){
-                        $model->name = '----------------'.$model->name;
-                    }
                     $model->prependTo($parentId);
                     \Yii::$app->session->setFlash("success",'添加目录成功');
                      return $this->redirect(['index']);
@@ -86,14 +71,21 @@ class GoodsCategoryController extends Controller
                 //再次验证
                 if($cate->validate()){
                     try{
-                        $cate->makeRoot();
+                        if($cate->parent_id==0){
+                            $cate->save();
+                            \Yii::$app->session->setFlash('info','修改根目录成功');
+                            return $this->redirect(['index']);
+                        }else{
+                            //找到父级ID
+                            $parentId = GoodsCategory::findOne(['id'=>$cate->parent_id]);
+                            $cate->save($parentId);
+                            \Yii::$app->session->setFlash("success",'修改目录成功');
+                            return $this->redirect(['index']);
+                        }
                     }catch (Exception $e){
-                        \Yii::$app->session->setFlash('danger','不能将根目录修改并且不能将父分类添加到子分类里面');
-                        return $this->redirect(['index']);
+                        \Yii::$app->session->setFlash("success",$e->getMessage());
+                        return $this->refresh();
                     }
-                    \Yii::$app->session->setFlash('info','编辑成功');
-                    //跳转页面
-                     return $this->redirect(['index']);
                 }
             }
         }
@@ -110,15 +102,9 @@ class GoodsCategoryController extends Controller
 
         if(!empty($cates)){
             \Yii::$app->session->setFlash('danger','此分类下面有子分类，不能被删除');
-            return $this->redirect(['index']);
+            return $this->refresh(['index']);
         }else{
-           try{
-               $good->delete();
-           }catch (Exception $e){
-               \Yii::$app->session->setFlash('danger','不能删除根目录');
-               return $this->redirect(['index']);
-           }
-
+            $good->deleteWithChildren();
             \Yii::$app->session->setFlash('info','删除成功');
             return $this->redirect(['index']);
         }

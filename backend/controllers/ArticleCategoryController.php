@@ -29,7 +29,7 @@ class ArticleCategoryController extends Controller
             $categorys = ArticleCategory::find()->limit($page->limit)->offset($page->offset)->all();
 
             //显示视图
-            return $this->render('index',['categorys'=>$categorys ,'page'=>$pagev]);
+            return $this->render('index',['categorys'=>$categorys ,'page'=>$page]);
         }
 
 

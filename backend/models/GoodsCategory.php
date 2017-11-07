@@ -85,4 +85,13 @@ class GoodsCategory extends ActiveRecord
     {
         return new MenuQuery(get_called_class());
     }
+
+    public function getNameText(){
+        return str_repeat("-",4*$this->depth).$this->name;
+    }
+
+    //一对多
+    public function getGoods(){
+        return $this->hasMany(Goods::className(),['goods_categroy_id'=>'id']);
+    }
 }

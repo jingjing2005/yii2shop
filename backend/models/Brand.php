@@ -63,6 +63,10 @@ class Brand extends \yii\db\ActiveRecord
         }else{
             return "@web/".$this->logo;
         }
-
     }
+    //一对多
+    public function getGoods(){
+        return $this->hasMany(Goods::className(),['brand_id'=>'id']);
+    }
+
 }

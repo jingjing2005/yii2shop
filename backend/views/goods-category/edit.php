@@ -38,4 +38,17 @@ use yii\widgets\ActiveForm;
         </div>
     <?php ActiveForm::end(); ?>
 
-</div><!-- goodscategory-add -->
+</div>
+<?php
+$js=<<<EOF
+var treeObj = $.fn.zTree.getZTreeObj("w1");
+treeObj.expandAll(true);
+
+var node = treeObj.getNodeByParam("id", "{$cate->parent_id}", null);
+treeObj.selectNode(node);
+EOF;
+
+$this->registerJs($js);
+
+
+?>
