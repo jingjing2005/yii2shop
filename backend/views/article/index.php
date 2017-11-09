@@ -20,7 +20,7 @@
             <td><?=$article->intro?></td>
             <td><?=$article->status?></td>
             <td><?=$article->sort?></td>
-            <td><?=$article->detail->content?></td>
+            <td><?=\backend\models\Article::$articleArr[$article->status]?></td>
             <td><?=date('Y-m-d H:i:s',$article->inputtime)?></td>
             <td>
                 <?php

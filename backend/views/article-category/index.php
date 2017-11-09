@@ -15,7 +15,7 @@
             <td><?=$category->id?></td>
             <td><?=$category->name?></td>
             <td><?=$category->intro?></td>
-            <td><?=$category->status?></td>
+            <td><?=\backend\models\ArticleCategory::$cateArr[$category->status]?></td>
             <td><?=$category->sort?></td>
             <td><?php
                 echo \yii\bootstrap\Html::a('编辑',['edit','id'=>$category->id],['class'=>'btn btn-info']);

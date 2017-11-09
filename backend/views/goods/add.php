@@ -7,8 +7,8 @@ use yii\widgets\ActiveForm;
 /* @var $model backend\models\Goods */
 /* @var $form ActiveForm */
 ?>
-<div class="goods-add">
 
+<div class="goods-add">
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'goods_categroy_id')->dropDownList($gid) ?>
@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'maker_prcie') ?>
         <?= $form->field($model, 'shop_price') ?>
         <?=$form->field($model, 'logo')->widget('manks\FileInput', []);?>
-        <?= $form->field($intro,'content')->textarea()?>
+        <?= $form->field($intro,'content')->widget('kucha\ueditor\UEditor',[]);?>
     <?php
     echo $form->field($gallery, 'path')->widget('manks\FileInput', [
         'clientOptions' => [

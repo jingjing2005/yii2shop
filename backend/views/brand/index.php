@@ -17,7 +17,7 @@
             <td><?=$brand->intro?></td>
             <td><?=\yii\bootstrap\Html::img($brand->image,['width'=>'100'])?></td>
             <td><?=$brand->sort?></td>
-            <td><?=$brand->status?></td>
+            <td><?=\backend\models\Brand::$statusArr[$brand->status]?></td>
             <td><?php
                 echo \yii\bootstrap\Html::a('编辑',['edit','id'=>$brand->id],['class'=>'btn btn-info']);
                 echo \yii\bootstrap\Html::a('删除',['del','id'=>$brand->id],['class'=>'btn btn-danger']);

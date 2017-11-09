@@ -12,18 +12,17 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'goods_categroy_id')->dropDownList($gid) ?>
-
         <?= $form->field($model, 'brand_id')->dropDownList($bid) ?>
         <?= $form->field($model, 'stock') ?>
         <?php $model->is_on_sale=1;?>
-        <?= $form->field($model, 'is_on_sale')->radioList(\backend\models\Goods::$saleArr) ?>
+        <?= $form->field($model, 'is_on_sale')->radioList(['1'=>'是','0'=>'否']) ?>
         <?php $model->status=1;?>
-        <?= $form->field($model, 'status')->radioList(\backend\models\Goods::$staArr) ?>
+        <?= $form->field($model, 'status')->radioList(['1'=>'正常','0'=>'回收站']) ?>
         <?= $form->field($model, 'sort') ?>
         <?= $form->field($model, 'maker_prcie') ?>
         <?= $form->field($model, 'shop_price') ?>
         <?=$form->field($model, 'logo')->widget('manks\FileInput', []);?>
-        <?= $form->field($intro,'content')->textarea()?>
+        <?= $form->field($intro,'content')->widget('kucha\ueditor\UEditor',[])?>
     <?php
     echo $form->field($gallery, 'path')->widget('manks\FileInput', [
         'clientOptions' => [
