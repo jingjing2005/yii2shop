@@ -7,7 +7,6 @@
  */
 ?>
 
-<?=\yii\bootstrap\Html::a('注册用户',['add'],['class'=>'btn btn-success'])?>
 <table class="table">
     <tr>
         <th>ID</th>
@@ -35,3 +34,8 @@
         </tr>
     <?php endforeach;?>
 </table>
+<?php
+echo \yii\widgets\LinkPager::widget([
+    'pagination' => $page
+]);
+?>

@@ -35,6 +35,18 @@ class GoodsController extends Controller
     }
     //显示页面
     public function actionIndex(){
+
+        //总条数
+        $count = Brand::find()->count();
+        //每页显示条数
+        $pageSize = 2;
+        //创建分页对象
+        $page = new Pagination(
+            [
+                'pageSize'=>$pageSize,
+                'totalCount'=>$count,
+            ]
+        );
         //创建对象
         $query = Goods::find();
         //创建request对象
@@ -58,10 +70,10 @@ class GoodsController extends Controller
         if(isset($keyword)){
             $query->andwhere("name like '%{$keyword}%' or sn like '%{$keyword}%'");
         }
-        $goods = $query->all();
+        $goods = $query->limit($page->limit)->offset($page->offset)->all();
 //        echo "<pre>";
 //        var_dump($goods);exit;
-        return $this->render('index',['goods'=>$goods]);
+        return $this->render('index',['goods'=>$goods,'page'=>$page]);
     }
     //添加数据
 

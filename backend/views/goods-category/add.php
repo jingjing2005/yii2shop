@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'parent_id') ?>
+        <?= $form->field($model, 'parent_id')->hiddenInput() ?>
     <?= \liyuze\ztree\ZTree::widget([
         'setting' => '{
            callback:{
@@ -31,10 +31,24 @@ use yii\widgets\ActiveForm;
         'nodes' => $cate
     ]);
     ?>
-        <?= $form->field($model, 'intro') ?>
+        <?= $form->field($model, 'intro')->textarea() ?>
         <div class="form-group">
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 
 </div><!-- goodscategory-add -->
+
+<?php
+$js=<<<EOF
+var treeObj = $.fn.zTree.getZTreeObj("w1");
+treeObj.expandAll(true);
+
+var node = treeObj.getNodeByParam("id", "{$model->parent_id}", null);
+treeObj.selectNode(node);
+EOF;
+
+$this->registerJs($js);
+
+
+?>

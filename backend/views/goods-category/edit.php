@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($cate, 'name') ?>
-        <?= $form->field($cate, 'parent_id') ?>
+        <?= $form->field($cate, 'parent_id')->hiddenInput() ?>
     <?= \liyuze\ztree\ZTree::widget([
         'setting' => '{
            callback:{
@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
         'nodes' => $cate1
     ]);
     ?>
-        <?= $form->field($cate, 'intro') ?>
+        <?= $form->field($cate, 'intro')->textarea() ?>
         <div class="form-group">
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>

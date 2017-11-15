@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'goods_categroy_id')->dropDownList($gid) ?>
+        <?= $form->field($model, 'goods_category_id')->dropDownList($gid) ?>
         <?= $form->field($model, 'brand_id')->dropDownList($bid) ?>
         <?= $form->field($model, 'stock') ?>
         <?php $model->is_on_sale=1;?>

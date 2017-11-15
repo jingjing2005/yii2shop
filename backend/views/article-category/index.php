@@ -1,6 +1,4 @@
-<?php
-    echo \yii\bootstrap\Html::a('添加分类',['add',],['class'=>'btn btn-success']);
-?>
+
 <table class="table">
     <tr>
         <th>分类ID</th>

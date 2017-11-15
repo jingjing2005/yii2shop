@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'username') ?>
         <?= $form->field($model, 'password_hash')->passwordInput()?>
         <?= $form->field($model, 'email') ?>
-    
+
         <div class="form-group">
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>

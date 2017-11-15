@@ -1,5 +1,5 @@
 
-<?=\yii\bootstrap\Html::a('添加文章',['add'],['class'=>'btn btn-success'])?>
+
 <table class="table">
     <tr>
         <th>文章id</th>

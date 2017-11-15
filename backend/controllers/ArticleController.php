@@ -20,7 +20,7 @@ class ArticleController extends Controller
 {
         public function actionIndex(){
             $count = Article::find()->count();
-            $pageSize = 4;
+            $pageSize = 2;
             $page = new Pagination(
                 [
                     'pageSize'=>$pageSize,

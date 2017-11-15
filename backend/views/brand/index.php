@@ -1,4 +1,4 @@
-<?=\yii\bootstrap\Html::a('添加品牌',['add'],['class'=>'btn btn-success'])?>
+
 
 <table class="table">
     <tr>
